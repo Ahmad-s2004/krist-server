@@ -12,7 +12,7 @@ require('dotenv').config();
 db();
 
 app.use(cors({
-  origin: 'https://krist-client.vercel.app/',
+  origin: 'https://krist-client.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
