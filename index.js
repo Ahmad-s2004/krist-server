@@ -12,7 +12,7 @@ require('dotenv').config();
 db();
 
 app.use(cors({
-  origin: 'https://krist-client-i07hpq8pe-ahmad-s2004s-projects.vercel.app',
+  // origin: 'https://krist-client-i07hpq8pe-ahmad-s2004s-projects.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
