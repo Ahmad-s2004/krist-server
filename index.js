@@ -11,7 +11,10 @@ require('dotenv').config();
 // Database
 db();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://krist-client-i07hpq8pe-ahmad-s2004s-projects.vercel.app',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/uploads')));
