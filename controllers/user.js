@@ -127,8 +127,6 @@ try {
     
       console.log("Address added:", postData);
       return res.status(201).json({ message: "Address added successfully", data: findData });
-  }else{
-    return res.status(400).json({message:"not posting"})
   }
   return res.status(500).json({ message: "Internal server error", id, findData });
 }
