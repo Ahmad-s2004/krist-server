@@ -183,7 +183,7 @@ const removeAddress = async (req, res) => {
     const { _id } = req.params;
     console.log(_id, "ID");
     try {
-        const fetchedData = await address.findOne({ _id });
+        const fetchedData = await address.findById({ _id });
         if (fetchedData.deletedCount === 0) {
             return res.status(404).json({ message: "Address not found" });
         }
