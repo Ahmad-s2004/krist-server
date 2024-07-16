@@ -3,7 +3,9 @@ const key = 'ahmad2006';
 
 const isLoggedIn = (req, res, next) => {
     const token = req.headers.authorization
-
+    if(!token){
+        token = req.cookie.token;
+}
     if (!token) {
         return res.status(404).json({ message: "Token not Found", token });
     }
