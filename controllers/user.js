@@ -110,6 +110,26 @@ try {
   if (!findData) {
     return res.status(404).json({ message: "User not found" });
   }
+  let postData = await address.create({
+      userId: findData._id,
+      name,
+      phone,
+      email,
+      addresses,
+      city,
+      country,
+      postal,
+    });
+  if(postData){
+    
+      findData.address.push(postData._id);
+      await findData.save();
+    
+      console.log("Address added:", postData);
+      return res.status(201).json({ message: "Address added successfully", data: findData });
+  }else{
+    return res.status(400).json({message:"not posting"})
+  }
   return res.status(500).json({ message: "Internal server error", id, findData });
 }
 
