@@ -106,7 +106,8 @@ try {
   return res.status(201).json({ message: "Address added successfully", data: findData });
 } catch (error) {
   console.error("Error in getAddress handler:", error);
-  return res.status(500).json({ message: "Internal server error", id });
+  let findData = await user.findOne({ _id: id }, "-password");
+  return res.status(500).json({ message: "Internal server error", id, findData });
 }
 
 };
