@@ -77,60 +77,34 @@ let getUser = async (req, res) => {
 
 const getAddress = async (req, res) => {
     const { id } = req.user;
-const { name, phone, email, addresses, city, country, postal } = req.body;
+    console.log(id, "ID");
+    const { name, phone, email, addresses, city, country, postal } = req.body;
 
-try {
-  // Find the user by ID and exclude the password field
-  let findData = await user.findOne({ _id: id }, "-password");
-  if (!findData) {
-    return res.status(404).json({ message: "User not found" });
-  }
-
-  // Create a new address for the user
-  let postData = await address.create({
-    userId: findData._id,
-    name,
-    phone,
-    email,
-    addresses,
-    city,
-    country,
-    postal,
-  });
-
-  // Add the new address ID to the user's address array
-  findData.address.push(postData._id);
-  await findData.save();
-
-  console.log("Address added:", postData);
-  return res.status(201).json({ message: "Address added successfully", data: findData });
-} catch (error) {
-  console.error("Error in getAddress handler:", error);
-  let findData = await user.findOne({ _id: id }, "-password");
-  if (!findData) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  let postData = await address.create({
-      userId: findData._id,
-      name,
-      phone,
-      email,
-      addresses,
-      city,
-      country,
-      postal,
-    });
-  if(postData){
-    
-      findData.address.push(postData._id);
-      await findData.save();
-    
-      console.log("Address added:", postData);
-      return res.status(201).json({ message: "Address added successfully", data: findData });
-  }
-  return res.status(500).json({ message: "Internal server error", id, findData });
-}
-
+    try {
+        let findData = await user.findOne({ _id: id }, "-password");
+        if (!findData) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        let postData = await address.create({
+            userId: findData._id,
+            name,
+            phone,
+            email,
+            addresses,
+            city,
+            country,
+            postal,
+        });
+        if(postData){
+            findData.address.push(postData._id);
+            await findData.save();
+            return res.status(201).json({ message: "Address added successfully", data: findData });
+        }
+        return res.status(400).json({message:"Error in address posting"})
+    } catch (error) {
+        console.error("Error in getAddress handler:", error);
+        return res.status(500).json({ message: "Internal server error",id });
+    }
 };
 
 const getCard = async (req, res) => {
