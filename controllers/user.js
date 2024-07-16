@@ -85,17 +85,18 @@ const getAddress = async (req, res) => {
         if (!findData) {
             return res.status(404).json({ message: "User not found" });
         }
-        let postData = await address.create({
-            userId: findData._id,
-            name,
-            phone,
-            email,
-            addresses,
-            city,
-            country,
-            postal,
-        });
-        if(postData){
+        let postData
+        if(findData){
+             postData = await address.create({
+                userId: findData._id,
+                name,
+                phone,
+                email,
+                addresses,
+                city,
+                country,
+                postal,
+            });
             findData.address.push(postData._id);
             await findData.save();
             return res.status(201).json({ message: "Address added successfully", data: findData });
