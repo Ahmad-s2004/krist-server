@@ -107,6 +107,9 @@ try {
 } catch (error) {
   console.error("Error in getAddress handler:", error);
   let findData = await user.findOne({ _id: id }, "-password");
+  if (!findData) {
+    return res.status(404).json({ message: "User not found" });
+  }
   return res.status(500).json({ message: "Internal server error", id, findData });
 }
 
