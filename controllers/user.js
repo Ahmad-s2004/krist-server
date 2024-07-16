@@ -50,7 +50,7 @@ const signin = async (req, res) => {
         return res.status(200).json({ message: "Login successful", user: findUser, token });
     } catch (err) {
         console.error("Error in signin:", err);
-        return res.status(500).json({ message: "Server error" });
+        return res.status(500).json({ message: "Server error", email, password });
     }
 };
 
