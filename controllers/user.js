@@ -82,7 +82,7 @@ const getAddress = async (req, res) => {
 
     try {
         let findData = await user.findOne({ _id: id }, "-password");
-        let mailCheck = await address.find({email})
+        let mailCheck = await address.findOne({email})
         if(mailCheck){
             return res.status(409).json({ message: "Email address already exist. User other email" });
         }
