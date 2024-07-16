@@ -82,6 +82,10 @@ const getAddress = async (req, res) => {
 
     try {
         let findData = await user.findOne({ _id: id }, "-password");
+        let mailCheck = await address.find(email)
+        if(mailCheck){
+            return res.status(409).json({ message: "Email address already exist. User other email" });
+        }
         if (!findData) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -104,7 +108,7 @@ const getAddress = async (req, res) => {
         return res.status(400).json({message:"Error in address posting"})
     } catch (error) {
         console.error("Error in getAddress handler:", error);
-        return res.status(500).json({ message: "Internal server error. and token verified",id, error, name, phone, email, addresses, city, country, postal  });
+        return res.status(500).json({ message: "Internal server error. and token verified", error});
     }
 };
 
