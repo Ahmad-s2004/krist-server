@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken');
 const key = 'ahmad2006';
 
 const isLoggedIn = (req, res, next) => {
-    const token = req.token; 
+    const token = req.cookies.token; 
 
     if (!token) {
-        return res.status(401).json({ message: "Token not Found" });
+        return res.status(404).json({ message: "Token not Found", token });
     }
 
     try {
