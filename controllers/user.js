@@ -183,8 +183,8 @@ const removeAddress = async (req, res) => {
     const { _id } = req.params;
     console.log(_id, "ID");
     try {
-        const fetchedData = await address.findById({ _id });
-        if (fetchedData.deletedCount === 0) {
+        const result = await address.deleteOne({ _id });
+        if (result.deletedCount === 0) {
             return res.status(404).json({ message: "Address not found" });
         }
         return res.status(200).json({ message: "Removed" });
@@ -193,6 +193,7 @@ const removeAddress = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 module.exports = {
     signup,
