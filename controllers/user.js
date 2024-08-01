@@ -61,17 +61,17 @@ let getUser = async (req, res) => {
         return res.status(400).json({ message: "User not found in request" });
     }
 
-    let _id = req.user.id;
+    let id = req.user;
 
     try {
-        let findData = await user.findOne({ _id });
+        let findData = await user.findOne({ _id: id });
         if (!findData) {
             return res.status(404).json({ message: "User not found" });
         }
-        res.status(201).json({ message: "Data found", findData });
+      return res.status(201).json({ message: "Data found", findData });
     } catch (err) {
         console.error("Error in getUser controller:", err);
-        res.status(500).json({ message: "Server error" });
+        return res.status(500).json({ message: "Server error", err });
     }
 };
 
