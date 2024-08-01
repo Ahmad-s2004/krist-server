@@ -3,7 +3,7 @@ const key = 'ahmad2006';
 
 const isLoggedIn = (req, res, next) => {
     // const token = req.headers.authorization
-    const token = req.cookies
+    const token = JSON.parse(req.cookies)
 
 
     if (!token) {
