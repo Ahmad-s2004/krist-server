@@ -6,7 +6,7 @@ const isLoggedIn = require('../middleware/isLogIn')
 
 router.post("/signup", signup)
 router.post("/signin", signin)
-router.get("/getUser", isLoggedIn , getUser)
+router.post("/getUser", isLoggedIn , getUser)
 router.post("/getAddress", isLoggedIn , getAddress)
 router.post("/getCard", isLoggedIn , getCard)
 router.post("/getOrder", isLoggedIn , getOrder)
