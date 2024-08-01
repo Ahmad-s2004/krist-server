@@ -16,7 +16,7 @@ const isLoggedIn = (req, res, next) => {
         next();
     } catch (err) {
         console.error("Error in isLoggedIn middleware:", err);
-        return res.status(401).json({ message: "Invalid token" });
+        return res.status(401).json({ message: "Invalid token" , err});
     }
 };
 
