@@ -179,6 +179,17 @@ const getAllAddress = async(req, res) =>{
         return res.status(500).json({message:"Internal server error"})        
     }
 }
+const getUserAddress = async(req, res)=>{
+
+    const { id } = req.user;
+    try {
+        let getingAddress = await address.find({userId: id})
+            return res.status(201).json({ message: "Address found", data: getingAddress });
+    } catch (error) {
+        console.error("Error in getAddress handler:", error);
+        return res.status(500).json({ message: "Internal server error. and token verified", error});
+    }
+}
 const removeAddress = async (req, res) => {
     const { _id } = req.params;
     console.log(_id, "ID");
