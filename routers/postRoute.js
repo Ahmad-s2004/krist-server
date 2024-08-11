@@ -12,7 +12,7 @@ router.post("/getCard", isLoggedIn , getCard)
 router.post("/getOrder", isLoggedIn , getOrder)
 
 router.get("/getAllAddress", getAllAddress)
-router.get("/getUserAddress", getUserAddress)
+router.get("/getUserAddress", isLoggedIn, getUserAddress)
 
 router.delete("/removeAddress/:_id", removeAddress)
 
