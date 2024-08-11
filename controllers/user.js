@@ -61,7 +61,7 @@ let getUser = async (req, res) => {
         return res.status(400).json({ message: "User not found in request" });
     }
 
-    let id = req.user;
+    let id = req.user.id;
 
     try {
         let findData = await user.findOne({ _id: id });
