@@ -10,7 +10,7 @@ require('dotenv').config();
 
 // Database
 db();
-
+app.use(cors());
 app.use(cors({
   origin: 'https://krist-client.vercel.app', // Allow only this origin
   methods: 'GET,POST,PUT,DELETE', // Allow specific HTTP methods
