@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-let {signup, signin, getUser, getAddress, getCard, getOrder, getAllAddress, removeAddress} = require('../controllers/user')
+let {signup, signin, getUser, getAddress, getCard, getOrder, getAllAddress, removeAddress, getUserAddress} = require('../controllers/user')
 const isLoggedIn = require('../middleware/isLogIn')
 
 
@@ -12,6 +12,8 @@ router.post("/getCard", isLoggedIn , getCard)
 router.post("/getOrder", isLoggedIn , getOrder)
 
 router.get("/getAllAddress", getAllAddress)
+router.get("/getUserAddress", getUserAddress)
+
 router.delete("/removeAddress/:_id", removeAddress)
 
 module.exports = router

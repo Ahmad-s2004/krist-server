@@ -179,17 +179,20 @@ const getAllAddress = async(req, res) =>{
         return res.status(500).json({message:"Internal server error"})        
     }
 }
-const getUserAddress = async(req, res)=>{
-
+const getUserAddress = async (req, res) => {
     const { id } = req.user;
     try {
-        let getingAddress = await address.find({userId: id})
-            return res.status(201).json({ message: "Address found", data: getingAddress });
+        const addresses = await address.find({ userId: id });
+        if (!addresses.length) {
+            return res.status(404).json({ message: "No addresses found for this user." });
+        }
+        return res.status(200).json({ message: "Addresses found", data: addresses });
     } catch (error) {
-        console.error("Error in getAddress handler:", error);
-        return res.status(500).json({ message: "Internal server error. and token verified", error});
+        console.error("Error in getUserAddress handler:", error);
+        return res.status(500).json({ message: "Internal server error", error: error.message });
     }
-}
+};
+
 const removeAddress = async (req, res) => {
     const { _id } = req.params;
     console.log(_id, "ID");
@@ -214,5 +217,6 @@ module.exports = {
     getCard,
     getOrder,
     getAllAddress,
-    removeAddress
+    removeAddress,
+    getUserAddress
 };
