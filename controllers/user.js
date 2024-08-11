@@ -189,7 +189,7 @@ const getUserAddress = async (req, res) => {
         if (!addresses.length) {
             return res.status(404).json({ message: "No addresses found for this user." });
         }
-        return res.status(200).json({ message: "Addresses found"}).send(addresses);
+        return res.status(200).send(addresses);
     } catch (error) {
         console.error("Error in getUserAddress handler:", error);
         return res.status(500).json({ message: "Internal server error", error: error.message });
