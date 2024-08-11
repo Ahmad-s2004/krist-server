@@ -180,7 +180,10 @@ const getAllAddress = async(req, res) =>{
     }
 }
 const getUserAddress = async (req, res) => {
-    const { id } = req.user;
+    if (!req.user || !req.user.id) {
+        return res.status(400).json({ message: "User not found in request" });
+    }
+    const id  = req.user.id;
     try {
         const addresses = await address.find({ userId: id });
         if (!addresses.length) {
