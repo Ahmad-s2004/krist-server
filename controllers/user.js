@@ -186,9 +186,9 @@ const getUserAddress = async (req, res) => {
     const id  = req.user.id;
     try {
         const addresses = await address.find({ userId: id });
-        if (!addresses.length) {
-            return res.status(404).json({ message: "No addresses found for this user." });
-        }
+        // if (!addresses.length) {
+            // return res.status(404).json({ message: "No addresses found for this user." });
+        // }
         return res.status(200).json(addresses);
     } catch (error) {
         console.error("Error in getUserAddress handler:", error);
