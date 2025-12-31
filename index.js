@@ -10,10 +10,22 @@ require('dotenv').config();
 
 // Database
 db();
+const allowedOrigins = [
+  'https://krist-client.vercel.app',
+  'https://krist-client-n9uw.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://krist-client-n9uw.vercel.app/', 
-  methods: 'GET,POST,PUT,DELETE',
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true); // Postman or server-side requests
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
+  methods: ['GET','POST','PUT','DELETE']
 }));
 app.use(express.json());
 app.use(cookieParser());
