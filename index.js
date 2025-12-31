@@ -12,9 +12,9 @@ require('dotenv').config();
 db();
 app.use(cors());
 app.use(cors({
-  origin: 'https://krist-client.vercel.app', // Allow only this origin
-  methods: 'GET,POST,PUT,DELETE', // Allow specific HTTP methods
-  credentials: true // Allow cookies to be sent with the request
+  origin: 'https://krist-client-n9uw.vercel.app/', 
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
